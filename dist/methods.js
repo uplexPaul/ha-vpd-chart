@@ -98,22 +98,13 @@ export const methods = {
     getLeafTemperatureOffset() {
         let offset = 2;
         if (typeof this.config.leaf_temperature_offset === 'number') {
-            if (this.config.leaf_temperature_offset < 2) {
-                return 2;
-            }
             return this.config.leaf_temperature_offset;
         }
         if (typeof this.config.leaf_temperature_offset === 'string') {
             offset = this._hass.states[this.config.leaf_temperature_offset].state;
             if (!isNaN(offset)) {
-                if (offset < 2) {
-                    return 2;
-                }
                 return offset;
             }
-        }
-        if (offset < 2) {
-            offset = 2;
         }
         return offset;
     },
